@@ -6,6 +6,7 @@ var path = require('path');
 //配置
 var config = {
     port: 8888,
+    main:'/_book/index.html',
     denyAccess: ['./httpserver.js', './src/requirecache.js'],
     localIPs: ['127.0.0.1'],
     srcpath: '/src'
@@ -20,7 +21,7 @@ console.log("Server has started. port:"+config.port);
 function processRequestRoute(request, response) {
     var pathname = url.parse(request.url).pathname;
     if (pathname === '/') {
-        pathname = "/_book/index.html"; //默认页面
+        pathname = config.main; //默认页面
     }
     var ext = path.extname(pathname);
     var localPath = ''; //本地相对路径

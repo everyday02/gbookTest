@@ -7,6 +7,7 @@ require([
 
     // Use a specific index
     function loadIndex(data) {
+        console.log(data);
         index = lunr.Index.load(data);
     }
 
@@ -15,11 +16,29 @@ require([
         $.getJSON(gitbook.state.basePath+"/search_index.json")
         .then(loadIndex);
     }
+    //判断是否为中文；
+    function isChn(str){
+      var reg=/^[\u4E00-\u9FA5]+$/;
+      if(reg.test(str)) return true;
+      return false;
+    }
+    //输入的中文转换为特定搜索unicode编码加上特殊前缀；
+    function stringtocode(name){
+       if(!isChn(name)) return name;
+       var result=String();
+			 if(name==''||name==undefined) return name;
+			 for(var i=0;i<name.length;i++){
+				    result+= "&#x" + name.charCodeAt(i).toString(16) +';';
+			 }
+      result = result.substring(0,result.length-1);
+       return result;
+    }
 
     // Search for a term and return results
     function search(q) {
         if (!index) return;
-
+        q = stringtocode(q);
+        console.log(q);
         var results = _.chain(index.search(q))
         .map(function(result) {
             var parts = result.ref.split("#")
@@ -99,7 +118,7 @@ require([
         $(document).on("keyup", ".book-search input", function(e) {
             var key = (e.keyCode ? e.keyCode : e.which);
             var q = $(this).val();
-
+            console.log(q);
             if (key == 27) {
                 e.preventDefault();
                 toggleSearch(false);
@@ -131,5 +150,3 @@ require([
 
     gitbook.events.bind("page.change", recoverSearch);
 });
-
-
