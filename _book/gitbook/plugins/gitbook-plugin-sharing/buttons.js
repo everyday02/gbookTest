@@ -1,5 +1,13 @@
 require(["gitbook", "lodash"], function(gitbook, _) {
     var SITES = {
+        'weibo': {
+            'label': '新浪微博',
+            'icon': 'fa fa-weibo',
+            'onClick': function(e) {
+                e.preventDefault();
+                window.open("http://service.weibo.com/share/share.php?content=utf-8&url="+encodeURIComponent(location.href)+"&title="+encodeURIComponent(document.title));
+            }
+        },
         'facebook': {
             'label': 'Facebook',
             'icon': 'fa fa-facebook',
@@ -24,14 +32,6 @@ require(["gitbook", "lodash"], function(gitbook, _) {
                 window.open("https://plus.google.com/share?url="+encodeURIComponent(location.href));
             }
         },
-        'weibo': {
-            'label': 'Weibo',
-            'icon': 'fa fa-weibo',
-            'onClick': function(e) {
-                e.preventDefault();
-                window.open("http://service.weibo.com/share/share.php?content=utf-8&url="+encodeURIComponent(location.href)+"&title="+encodeURIComponent(document.title));
-            }
-        },
         'instapaper': {
             'label': 'Instapaper',
             'icon': 'fa fa-instapaper',
@@ -50,11 +50,11 @@ require(["gitbook", "lodash"], function(gitbook, _) {
         }
     };
 
-
-
     gitbook.events.bind("start", function(e, config) {
         var opts = config.sharing;
-
+        opts.weibo = true;
+        opts.twitter = false;
+        opts.facebook = false;
         // Create dropdown menu
         var menu = _.chain(opts.all)
             .map(function(id) {
@@ -72,7 +72,7 @@ require(["gitbook", "lodash"], function(gitbook, _) {
         if (menu.length > 0) {
             gitbook.toolbar.createButton({
                 icon: 'fa fa-share-alt',
-                label: 'Share',
+                label: '分享',
                 position: 'right',
                 dropdown: [menu]
             });
@@ -80,8 +80,9 @@ require(["gitbook", "lodash"], function(gitbook, _) {
 
         // Direct actions to share
         _.each(SITES, function(site, sideId) {
+            console.log(site);
+            console.log(sideId);
             if (!opts[sideId]) return;
-
             gitbook.toolbar.createButton({
                 icon: site.icon,
                 label: site.text,
@@ -89,5 +90,6 @@ require(["gitbook", "lodash"], function(gitbook, _) {
                 onClick: site.onClick
             });
         });
+
     });
 });

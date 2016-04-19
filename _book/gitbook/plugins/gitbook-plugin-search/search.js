@@ -65,7 +65,7 @@ require([
             'type': 'text',
             'class': 'form-control',
             'val': value,
-            'placeholder': 'Type to search'
+            'placeholder': '索引列表'
         });
 
         $searchInput.appendTo($searchForm);
