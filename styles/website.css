@@ -1,0 +1,8 @@
+.book .book-header {
+    background: #F9F9F9!important;
+    border-bottom: 1px solid #F3F3F3!important;
+}
+
+.gitbook-link{
+  display: none!important;
+}
