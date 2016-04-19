@@ -1,1 +1,10 @@
-# Docker 相关
+# 在线文档
+* [Workflow 相关](/mds/a1/README.md)
+    * [GeneDock APP和Workflow配置手册](/mds/a1/01.md)
+    * [GeneDock 工作流客户端使用说明书](/mds/a1/02.md)
+    * [Workflow配置实战演练之mapinput与mapoutput](/mds/a1/03.md)
+* [Docker 相关](mds/a2/README.md)
+    * [制作一个能够在GeneDock平台运行的Docker镜像](/mds/a2/01.md)
+* [其他](/mds/other/README.md)
+    * [GeneDock report配置手册](/mds/other/01.md)
+    * [实战演练之GATK Best Practices](/mds/other/02.md)
