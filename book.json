@@ -1,0 +1,13 @@
+{
+    "styles": {
+        "website": "styles/website.css",
+        "ebook": "styles/ebook.css",
+        "pdf": "styles/pdf.css",
+        "mobi": "styles/mobi.css",
+        "epub": "styles/epub.css"
+    },
+    "variables":{
+      "company":"北京聚道科技有限公司",
+      "version":"1.0.0"
+    }
+}
